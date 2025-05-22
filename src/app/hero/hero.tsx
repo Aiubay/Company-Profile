@@ -25,7 +25,7 @@ export default function Hero() {
             recusandae architecto nobis hic?
           </p>
           <div className="flex justify-center mt-8">
-            <Button variant="default" size="lg" className="text-foreground">
+            <Button variant="default" size="lg">
               <LucideRocket className="mr-2 h-5 w-5" />
               Cycle now
             </Button>

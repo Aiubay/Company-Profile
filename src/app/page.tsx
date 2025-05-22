@@ -3,6 +3,7 @@ import Hero from "./hero/hero";
 import Customers from "./customers/customers";
 import Process from "./process/process";
 import { Results } from "./results/results";
+import Contact from "./contact/contact";
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
           <Results/>
         </section>
         <section id="contact">
-
+          <Contact />
         </section>
       </div>
     </div>
