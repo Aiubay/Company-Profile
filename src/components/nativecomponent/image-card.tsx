@@ -39,7 +39,7 @@ export function ImageCard({
       )}
       <CardContent>
         {svg ? (
-          <div className="w-[300px] h-[100px] text-green-600 dark:text-green-400">
+          <div className="w-[300px] h-[150px] text-green-600 dark:text-green-400">
             {svg}
           </div>
         ) : (
@@ -50,6 +50,7 @@ export function ImageCard({
               width={width}
               height={height}
               className={rounded ? "rounded-xl" : ""}
+              style={{ aspectRatio: "1/1", }}
             />
           )
         )}

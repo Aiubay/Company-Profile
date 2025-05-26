@@ -1,9 +1,10 @@
 import Navbar from "./navbar/navbar";
 import Hero from "./hero/hero";
 import Customers from "./customers/customers";
-import Process from "./process/process";
-import { Results } from "./results/results";
+import {Process} from "./process/process";
+import {Results} from "./results/results";
 import Contact from "./contact/contact";
+import { Footer } from "./footer/footer";
 
 export default function Home() {
   return (
@@ -22,12 +23,13 @@ export default function Home() {
           <Process />
         </section>
         <section id="results">
-          <Results/>
+          <Results />
         </section>
         <section id="contact">
           <Contact />
         </section>
       </div>
+          <Footer/>
     </div>
   );
 }

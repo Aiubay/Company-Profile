@@ -112,6 +112,15 @@
   --sidebar-ring: oklch(0.527 0.154 150.069);
 }
 
+.dark {
+  --label-color: 210 20% 98%;
+}
+
+.dark .text-label {
+  color: var(--label-color);
+}
+
+
 
 @layer base {
   * {
@@ -119,5 +128,34 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Define your custom keyframes first */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: 'translate(-20px, 20px) scale(0.9)';
+  }
+}
+
+/* Create a custom utility class using @apply for your animation */
+/* You might put this in the 'utilities' layer or directly */
+@layer utilities {
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+
+  /* Optional: For animation delays, you might create variants or explicit classes */
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
   }
 }

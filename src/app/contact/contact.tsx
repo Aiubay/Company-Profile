@@ -6,7 +6,7 @@ import * as z from "zod";
 import { useCallback, useEffect, useState } from "react";
 import { RefreshCw } from "lucide-react";
 
-import { Button } from "@/components/ui/button"; // Assuming Shadcn UI setup
+import { Button } from "@/components/ui/button"; 
 import {
   Form,
   FormControl,
@@ -14,10 +14,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"; // Assuming Shadcn UI setup
-import { Input } from "@/components/ui/input"; // Assuming Shadcn UI setup
-import { Textarea } from "@/components/ui/textarea"; // Assuming Shadcn UI setup
-import { cn } from "@/lib/utils"; // Assuming Shadcn UI setup (for conditional classNames)
+} from "@/components/ui/form"; 
+import { Input } from "@/components/ui/input"; 
+import { Textarea } from "@/components/ui/textarea"; 
+import { cn } from "@/lib/utils"; 
 import { Card } from "@/components/ui/card";
 
 const generateCaptcha = (length: number = 6): string => {
@@ -30,21 +30,21 @@ const generateCaptcha = (length: number = 6): string => {
   return result;
 };
 
-// 1. Define your form schema using Zod
+
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required." }),
-  phoneNumber: z.string().optional(), // Optional field
+  phoneNumber: z.string().optional(), 
   email: z
     .string()
     .min(1, { message: "Email is required." })
     .email({ message: "Please enter a valid email address." }),
-  company: z.string().optional(), // Optional field
+  company: z.string().optional(), 
   subject: z.string().min(1, { message: "Subject is required." }),
   question: z.string().min(1, { message: "Question is required." }),
-  captcha: z.string().min(1, { message: "CAPTCHA is required." }), // CAPTCHA field
+  captcha: z.string().min(1, { message: "CAPTCHA is required." }), 
 });
 
-// Define the type for our form values based on the schema
+
 type FormData = z.infer<typeof formSchema>;
 
 export default function Contact() {
@@ -56,19 +56,19 @@ export default function Contact() {
     const newCaptcha = generateCaptcha();
     setCurrentCaptcha(newCaptcha);
     if (form) {
-      // Ensure form is initialized
-      form.setValue("captcha", ""); // Clear previous CAPTCHA input
-      form.clearErrors("captcha"); // Clear any existing CAPTCHA errors
+      
+      form.setValue("captcha", ""); 
+      form.clearErrors("captcha"); 
     }
   }, []);
 
   const form = useForm<FormData>({
     resolver: zodResolver(
       formSchema.refine(
-        (data) => data.captcha === currentCaptcha, // Custom refinement for CAPTCHA validation
+        (data) => data.captcha === currentCaptcha, 
         {
           message: "CAPTCHA does not match.",
-          path: ["captcha"], // Path to the field to attach the error message
+          path: ["captcha"], 
         }
       )
     ),
@@ -81,25 +81,25 @@ export default function Contact() {
       question: "",
       captcha: "",
     },
-    mode: "onTouched", // Validate on blur
+    mode: "onTouched", 
   });
 
   useEffect(() => {
     refreshCaptcha();
-    // form.setValue("name", "");
-    // form.setValue("email", "admin@example.com");
-  }, [refreshCaptcha, form]); // form.setValue is stable, but including form is safer
+    
+    
+  }, [refreshCaptcha, form]); 
 
   async function onSubmit(values: FormData) {
-    // Simulate API call or actual submission logic
+    
     console.log("Form submitted successfully:", values);
-    setSubmissionAttemptedAndFailed(false); // Reset on successful submission logic
-    // alert("Form submitted successfully!"); // Replace with a toast or better notification
-    form.reset(); // Optionally reset form fields after successful submission
-    refreshCaptcha(); // Refresh CAPTCHA after submission
+    setSubmissionAttemptedAndFailed(false); 
+    
+    form.reset(); 
+    refreshCaptcha(); 
   }
 
-  // Handle invalid submission attempts
+  
   function onInvalid(errors: any) {
     console.log("Form submission failed due to validation errors:", errors);
     setSubmissionAttemptedAndFailed(true);
@@ -113,7 +113,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex justify-center items-start min-h-screen py-8 px-4">
+    <div className="flex justify-center items-start py-8 px-4">
       <Card>
         <div className="w-full max-w-2xl p-6 md:p-8 rounded-lg">
           <h2 className="text-2xl font-semibold text-center text-primary mb-6 ">
@@ -124,7 +124,6 @@ export default function Contact() {
               onSubmit={form.handleSubmit(onSubmit, onInvalid)}
               className="space-y-6"
             >
-              {/* Name Field */}
               <FormField
                 control={form.control}
                 name="name"
@@ -145,7 +144,6 @@ export default function Contact() {
                 )}
               />
 
-              {/* Phone Number Field */}
               <FormField
                 control={form.control}
                 name="phoneNumber"
@@ -166,7 +164,6 @@ export default function Contact() {
                 )}
               />
 
-              {/* Email Field */}
               <FormField
                 control={form.control}
                 name="email"
@@ -188,7 +185,6 @@ export default function Contact() {
                 )}
               />
 
-              {/* Subject Field */}
               <FormField
                 control={form.control}
                 name="subject"
@@ -209,17 +205,14 @@ export default function Contact() {
                 )}
               />
 
-              {/* Question Field */}
               <FormField
                 control={form.control}
                 name="question"
                 render={({ field }) => (
                   <FormItem className="grid grid-cols-1 md:grid-cols-4 md:items-start md:gap-x-4 md:gap-y-2">
                     {" "}
-                    {/* items-start for textarea */}
                     <FormLabel className="md:text-left md:col-span-1 mb-1 md:mb-0 pt-2 font-medium">
                       {" "}
-                      {/* pt-2 for alignment with textarea */}
                       Question <span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl className="md:col-span-3">
@@ -229,7 +222,7 @@ export default function Contact() {
                         className={cn(
                           "min-h-[100px] resize-y",
                           getInputBorderClass("question")
-                        )} // Added min-height and resize
+                        )} 
                       />
                     </FormControl>
                     <FormMessage className="md:col-span-3 md:col-start-2 text-sm" />
